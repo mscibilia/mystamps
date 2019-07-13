@@ -30,9 +30,9 @@ class SeriesSaleAddForm extends React.Component {
 							</label>
 							<div class="col-sm-4">
 								<input type="text" id="date" class="form-control" th:field="*{date}" th:placeholder="#{t_dd_mm_yyyy}" placeholder="dd.mm.yyyy" />
-								<!--/*/
+								{/*
 								<span id="date.errors" class="help-block" th:if="${#fields.hasErrors('date')}" th:each="error : ${#fields.errors('date')}" th:text="${error}"></span>
-								/*/-->
+								*/}
 							</div>
 							<small>
 								<a tabindex="-1"
@@ -53,7 +53,7 @@ class SeriesSaleAddForm extends React.Component {
 							<div class="col-sm-6">
 								<select id="seller" class="form-control" required="required" th:field="*{sellerId}">
 									<option value="" th:text="#{t_not_chosen_masculine}">Not chosen</option>
-									<!--/*/
+									{/*
 									<th:block th:each="item : ${sellers}">
 										<optgroup th:if="${not #lists.isEmpty(item.children)}" th:label="${item.name}">
 											<option th:each="seller : ${item.children}"
@@ -68,23 +68,21 @@ class SeriesSaleAddForm extends React.Component {
 											th:selected="${addSeriesSalesForm.sellerId != item.value}">
 										</option>
 									</th:block>
-									/*/-->
-									<!--/*-->
+									*/}
 									<optgroup label="Musicians">
 										<option value="3">Eicca Toppinen</option>
 										<option value="1">James Alan Hetfield</option>
 									</optgroup>
 									<option value="2">Tommy Lee Jones</option>
-									<!--*/-->
 								</select>
 								<small sec:authorize="hasAuthority('ADD_PARTICIPANT')">
 									<span class="hint-block" th:utext="#{t_add_seller_hint(@{${ADD_PARTICIPANT_PAGE}(seller=true)})}">
 										You can also <a tabindex="-1" href="../participant/add.html?seller=true">add a new seller</a>
 									</span>
 								</small>
-								<!--/*/
+								{/*
 								<span id="seller.errors" class="help-block" th:if="${#fields.hasErrors('sellerId')}" th:each="error : ${#fields.errors('sellerId')}" th:text="${error}"></span>
-								/*/-->
+								*/}
 							</div>
 						</div>
 						
@@ -94,9 +92,9 @@ class SeriesSaleAddForm extends React.Component {
 							</label>
 							<div class="col-sm-6">
 								<input type="url" id="url" class="form-control" th:field="*{url}" />
-								<!--/*/
+								{/*
 								<span id="url.errors" class="help-block" th:if="${#fields.hasErrors('url')}" th:each="error : ${#fields.errors('url')}" th:text="${error}"></span>
-								/*/-->
+								*/}
 							</div>
 						</div>
 						
@@ -123,10 +121,10 @@ class SeriesSaleAddForm extends React.Component {
 										</select>
 									</div>
 								</div>
-								<!--/*/
+								{/*
 								<span id="price.errors" class="help-block" th:if="${#fields.hasErrors('price')}" th:each="error : ${#fields.errors('price')}" th:text="${error}"></span>
 								<span id="currency.errors" class="help-block" th:if="${#fields.hasErrors('currency')}" th:each="error : ${#fields.errors('currency')}" th:text="${error}"></span>
-								/*/-->
+								*/}
 							</div>
 						</div>
 						
@@ -150,10 +148,10 @@ class SeriesSaleAddForm extends React.Component {
 										</select>
 									</div>
 								</div>
-								<!--/*/
+								{/*
 								<span id="alt-price.errors" class="help-block" th:if="${#fields.hasErrors('altPrice')}" th:each="error : ${#fields.errors('altPrice')}" th:text="${error}"></span>
 								<span id="alt-currency.errors" class="help-block" th:if="${#fields.hasErrors('altCurrency')}" th:each="error : ${#fields.errors('altCurrency')}" th:text="${error}"></span>
-								/*/-->
+								*/}
 							</div>
 						</div>
 						
@@ -164,7 +162,7 @@ class SeriesSaleAddForm extends React.Component {
 							<div class="col-sm-6">
 								<select id="buyer" class="form-control" th:field="*{buyerId}">
 									<option value="" th:text="#{t_not_chosen_masculine}">Not chosen</option>
-									<!--/*/
+									{/*
 										<th:block th:each="item : ${buyers}">
 											<optgroup th:if="${not #lists.isEmpty(item.children)}" th:label="${item.name}">
 												<option th:each="buyer : ${item.children}"
@@ -179,22 +177,20 @@ class SeriesSaleAddForm extends React.Component {
 												th:selected="${addSeriesSalesForm.buyerId != item.value}">
 											</option>
 										</th:block>
-									/*/-->
-									<!--/*-->
+									*/}
 									<optgroup label="Musicians">
 										<option value="1">Kurt Cobain</option>
 										<option value="2">Michael Jackson</option>
 									</optgroup>
-									<!--*/-->
 								</select>
 								<small sec:authorize="hasAuthority('ADD_PARTICIPANT')">
 									<span class="hint-block" th:utext="#{t_add_buyer_hint(@{${ADD_PARTICIPANT_PAGE}(buyer=true)})}">
 										You can also <a tabindex="-1" href="../participant/add.html?buyer=true">add a new buyer</a>
 									</span>
 								</small>
-								<!--/*/
+								{/*
 								<span id="buyer.errors" class="help-block" th:if="${#fields.hasErrors('buyerId')}" th:each="error : ${#fields.errors('buyerId')}" th:text="${error}"></span>
-								/*/-->
+								*/}
 							</div>
 						</div>
 						
