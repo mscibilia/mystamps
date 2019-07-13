@@ -36,7 +36,7 @@ class SeriesSaleAddForm extends React.Component {
 								*/}
 							</div>
 							<small>
-								<a tabindex="-1"
+								<a tabIndex="-1"
 									className="link-vcenter"
 									href="javascript:populateTransactionDateWithTodayDate(); void(0);" data-text="#{t_today}">
 									Today
@@ -78,7 +78,7 @@ class SeriesSaleAddForm extends React.Component {
 								</select>
 								<small data-authorize="hasAuthority('ADD_PARTICIPANT')">
 									<span className="hint-block" data-utext="#{t_add_seller_hint(@{${ADD_PARTICIPANT_PAGE}(seller=true)})}">
-										You can also <a tabindex="-1" href="../participant/add.html?seller=true">add a new seller</a>
+										You can also <a tabIndex="-1" href="../participant/add.html?seller=true">add a new seller</a>
 									</span>
 								</small>
 								{/*
@@ -186,7 +186,7 @@ class SeriesSaleAddForm extends React.Component {
 								</select>
 								<small data-authorize="hasAuthority('ADD_PARTICIPANT')">
 									<span className="hint-block" data-utext="#{t_add_buyer_hint(@{${ADD_PARTICIPANT_PAGE}(buyer=true)})}">
-										You can also <a tabindex="-1" href="../participant/add.html?buyer=true">add a new buyer</a>
+										You can also <a tabIndex="-1" href="../participant/add.html?buyer=true">add a new buyer</a>
 									</span>
 								</small>
 								{/*
