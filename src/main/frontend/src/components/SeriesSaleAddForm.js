@@ -21,8 +21,7 @@ class SeriesSaleAddForm extends React.Component {
 						method="post"
 						class="form-horizontal"
 						action="info.html"
-						th:action="@{${ADD_SERIES_ASK_PAGE}(id=${series.id})}"
-						th:object="${addSeriesSalesForm}">
+						data-action="@{${ADD_SERIES_ASK_PAGE}(id=${series.id})}">
 						
 						<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('date') ? 'has-error' : ''}">
 							<label for="date" class="control-label col-sm-3" data-text="#{t_date}">
