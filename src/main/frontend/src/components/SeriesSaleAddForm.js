@@ -12,6 +12,8 @@ class SeriesSaleAddForm extends React.Component {
 	// TODO: data-placeholder
 	// TODO: data-remove
 	// TODO: data-field
+	// TODO: data-value
+	// TODO: deal with asterisk
 	render() {
 		return (
 			<div class="row">
@@ -74,8 +76,8 @@ class SeriesSaleAddForm extends React.Component {
 									</optgroup>
 									<option value="2">Tommy Lee Jones</option>
 								</select>
-								<small sec:authorize="hasAuthority('ADD_PARTICIPANT')">
-									<span class="hint-block" th:utext="#{t_add_seller_hint(@{${ADD_PARTICIPANT_PAGE}(seller=true)})}">
+								<small data-authorize="hasAuthority('ADD_PARTICIPANT')">
+									<span class="hint-block" data-utext="#{t_add_seller_hint(@{${ADD_PARTICIPANT_PAGE}(seller=true)})}">
 										You can also <a tabindex="-1" href="../participant/add.html?seller=true">add a new seller</a>
 									</span>
 								</small>
@@ -182,8 +184,8 @@ class SeriesSaleAddForm extends React.Component {
 										<option value="2">Michael Jackson</option>
 									</optgroup>
 								</select>
-								<small sec:authorize="hasAuthority('ADD_PARTICIPANT')">
-									<span class="hint-block" th:utext="#{t_add_buyer_hint(@{${ADD_PARTICIPANT_PAGE}(buyer=true)})}">
+								<small data-authorize="hasAuthority('ADD_PARTICIPANT')">
+									<span class="hint-block" data-utext="#{t_add_buyer_hint(@{${ADD_PARTICIPANT_PAGE}(buyer=true)})}">
 										You can also <a tabindex="-1" href="../participant/add.html?buyer=true">add a new buyer</a>
 									</span>
 								</small>
@@ -195,7 +197,7 @@ class SeriesSaleAddForm extends React.Component {
 						
 						<div class="form-group form-group-sm">
 							<div class="col-sm-offset-3 col-sm-4">
-								<input type="submit" class="btn btn-primary" value="Add info" th:value="#{t_add_info}" />
+								<input type="submit" class="btn btn-primary" value="Add info" data-value="#{t_add_info}" />
 							</div>
 						</div>
 						
