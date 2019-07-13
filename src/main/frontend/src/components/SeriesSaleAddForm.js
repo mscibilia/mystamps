@@ -14,9 +14,10 @@ class SeriesSaleAddForm extends React.Component {
 	// TODO: data-field
 	// TODO: data-value
 	// TODO: deal with asterisk
+	// TODO: remove background
 	render() {
 		return (
-			<div className="row">
+			<div className="row" style={{ 'backgroundColor': '#f5f5f5' }}>
 				<div className="col-sm-12">
 					<h5 data-text="#{t_add_info_who_selling_series}">Add info about selling/buying this series</h5>
 					<form id="add-series-sales-form"
