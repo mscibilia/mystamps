@@ -26,7 +26,7 @@ class SeriesSaleAddForm extends React.Component {
 						data-action="@{${ADD_SERIES_ASK_PAGE}(id=${series.id})}">
 						
 						<div className="form-group form-group-sm" data-classappend="${#fields.hasErrors('date') ? 'has-error' : ''}">
-							<label for="date" className="control-label col-sm-3" data-text="#{t_date}">
+							<label htmlFor="date" className="control-label col-sm-3" data-text="#{t_date}">
 								Date
 							</label>
 							<div className="col-sm-4">
@@ -45,7 +45,7 @@ class SeriesSaleAddForm extends React.Component {
 						</div>
 						
 						<div className="form-group form-group-sm" data-classappend="${#fields.hasErrors('sellerId') ? 'has-error' : ''}">
-							<label for="seller" className="control-label col-sm-3">
+							<label htmlFor="seller" className="control-label col-sm-3">
 								<span data-remove="tag" data-text="#{t_seller}">
 									Seller
 								</span>
@@ -88,7 +88,7 @@ class SeriesSaleAddForm extends React.Component {
 						</div>
 						
 						<div className="form-group form-group-sm" data-classappend="${#fields.hasErrors('url') ? 'has-error' : ''}">
-							<label for="url" className="control-label col-sm-3" data-text="#{t_url}">
+							<label htmlFor="url" className="control-label col-sm-3" data-text="#{t_url}">
 								URL
 							</label>
 							<div className="col-sm-6">
@@ -100,7 +100,7 @@ class SeriesSaleAddForm extends React.Component {
 						</div>
 						
 						<div className="form-group form-group-sm" data-classappend="${#fields.hasErrors('price') or #fields.hasErrors('currency') ? 'has-error' : ''}">
-							<label for="price" className="control-label col-sm-3">
+							<label htmlFor="price" className="control-label col-sm-3">
 								<span data-remove="tag" data-text="#{t_price}">
 									Price
 								</span>
@@ -130,7 +130,7 @@ class SeriesSaleAddForm extends React.Component {
 						</div>
 						
 						<div className="form-group form-group-sm" data-classappend="${#fields.hasErrors('altPrice') or #fields.hasErrors('altCurrency') ? 'has-error' : ''}">
-							<label for="price" className="control-label col-sm-3" data-text="#{t_alternative_price}">
+							<label htmlFor="price" className="control-label col-sm-3" data-text="#{t_alternative_price}">
 								Alternative price
 							</label>
 							<div className="col-sm-6">
@@ -157,7 +157,7 @@ class SeriesSaleAddForm extends React.Component {
 						</div>
 						
 						<div className="form-group form-group-sm" data-classappend="${#fields.hasErrors('buyerId') ? 'has-error' : ''}">
-							<label for="buyer" className="control-label col-sm-3" data-text="#{t_buyer}">
+							<label htmlFor="buyer" className="control-label col-sm-3" data-text="#{t_buyer}">
 								Buyer
 							</label>
 							<div className="col-sm-6">
