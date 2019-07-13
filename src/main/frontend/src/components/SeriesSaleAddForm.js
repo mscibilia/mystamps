@@ -113,12 +113,12 @@ class SeriesSaleAddForm extends React.Component {
 										<input type="text" id="price" className="form-control" size="5" required="required" data-field="*{price}" />
 									</div>
 									<div className="col-xs-4 no-padding">
-										<select id="currency" className="form-control" required="required" data-field="*{currency}">
+										<select id="currency" className="form-control" required="required" defaultValue="RUB" data-field="*{currency}">
 											<option value=""></option>
 											<option value="USD">USD</option>
 											<option value="EUR">EUR</option>
 											<option value="GBP">GBP</option>
-											<option value="RUB" selected="selected">RUB</option>
+											<option value="RUB">RUB</option>
 											<option value="CZK">CZK</option>
 										</select>
 									</div>
