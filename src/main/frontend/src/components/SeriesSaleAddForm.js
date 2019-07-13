@@ -28,7 +28,7 @@ class SeriesSaleAddForm extends React.Component {
 								Date
 							</label>
 							<div class="col-sm-4">
-								<input type="text" id="date" class="form-control" th:field="*{date}" th:placeholder="#{t_dd_mm_yyyy}" placeholder="dd.mm.yyyy" />
+								<input type="text" id="date" class="form-control" data-field="*{date}" th:placeholder="#{t_dd_mm_yyyy}" placeholder="dd.mm.yyyy" />
 								{/*
 								<span id="date.errors" class="help-block" th:if="${#fields.hasErrors('date')}" th:each="error : ${#fields.errors('date')}" th:text="${error}"></span>
 								*/}
@@ -50,7 +50,7 @@ class SeriesSaleAddForm extends React.Component {
 								<span class="required_field">*</span>
 							</label>
 							<div class="col-sm-6">
-								<select id="seller" class="form-control" required="required" th:field="*{sellerId}">
+								<select id="seller" class="form-control" required="required" data-field="*{sellerId}">
 									<option value="" data-text="#{t_not_chosen_masculine}">Not chosen</option>
 									{/*
 									<th:block th:each="item : ${sellers}">
@@ -90,7 +90,7 @@ class SeriesSaleAddForm extends React.Component {
 								URL
 							</label>
 							<div class="col-sm-6">
-								<input type="url" id="url" class="form-control" th:field="*{url}" />
+								<input type="url" id="url" class="form-control" data-field="*{url}" />
 								{/*
 								<span id="url.errors" class="help-block" th:if="${#fields.hasErrors('url')}" th:each="error : ${#fields.errors('url')}" th:text="${error}"></span>
 								*/}
@@ -107,10 +107,10 @@ class SeriesSaleAddForm extends React.Component {
 							<div class="col-sm-6">
 								<div class="row">
 									<div class="col-xs-6">
-										<input type="text" id="price" class="form-control" size="5" required="required" th:field="*{price}" />
+										<input type="text" id="price" class="form-control" size="5" required="required" data-field="*{price}" />
 									</div>
 									<div class="col-xs-4 no-padding">
-										<select id="currency" class="form-control" required="required" th:field="*{currency}">
+										<select id="currency" class="form-control" required="required" data-field="*{currency}">
 											<option value=""></option>
 											<option value="USD">USD</option>
 											<option value="EUR">EUR</option>
@@ -134,10 +134,10 @@ class SeriesSaleAddForm extends React.Component {
 							<div class="col-sm-6">
 								<div class="row">
 									<div class="col-xs-6">
-										<input type="text" id="alt-price" class="form-control" size="5" th:field="*{altPrice}" />
+										<input type="text" id="alt-price" class="form-control" size="5" data-field="*{altPrice}" />
 									</div>
 									<div class="col-xs-4 no-padding">
-										<select id="alt-currency" class="form-control" th:field="*{altCurrency}">
+										<select id="alt-currency" class="form-control" data-field="*{altCurrency}">
 											<option value=""></option>
 											<option value="USD">USD</option>
 											<option value="EUR">EUR</option>
@@ -159,7 +159,7 @@ class SeriesSaleAddForm extends React.Component {
 								Buyer
 							</label>
 							<div class="col-sm-6">
-								<select id="buyer" class="form-control" th:field="*{buyerId}">
+								<select id="buyer" class="form-control" data-field="*{buyerId}">
 									<option value="" data-text="#{t_not_chosen_masculine}">Not chosen</option>
 									{/*
 										<th:block th:each="item : ${buyers}">
