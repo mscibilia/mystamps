@@ -16,7 +16,7 @@ class SeriesSaleAddForm extends React.Component {
 		return (
 			<div class="row">
 				<div class="col-sm-12">
-					<h5 th:text="#{t_add_info_who_selling_series}">Add info about selling/buying this series</h5>
+					<h5 data-text="#{t_add_info_who_selling_series}">Add info about selling/buying this series</h5>
 					<form id="add-series-sales-form"
 						method="post"
 						class="form-horizontal"
@@ -25,7 +25,7 @@ class SeriesSaleAddForm extends React.Component {
 						th:object="${addSeriesSalesForm}">
 						
 						<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('date') ? 'has-error' : ''}">
-							<label for="date" class="control-label col-sm-3" th:text="#{t_date}">
+							<label for="date" class="control-label col-sm-3" data-text="#{t_date}">
 								Date
 							</label>
 							<div class="col-sm-4">
@@ -37,7 +37,7 @@ class SeriesSaleAddForm extends React.Component {
 							<small>
 								<a tabindex="-1"
 									class="link-vcenter"
-									href="javascript:populateTransactionDateWithTodayDate(); void(0);" th:text="#{t_today}">
+									href="javascript:populateTransactionDateWithTodayDate(); void(0);" data-text="#{t_today}">
 									Today
 								</a>
 							</small>
@@ -45,14 +45,14 @@ class SeriesSaleAddForm extends React.Component {
 						
 						<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('sellerId') ? 'has-error' : ''}">
 							<label for="seller" class="control-label col-sm-3">
-								<span th:remove="tag" th:text="#{t_seller}">
+								<span th:remove="tag" data-text="#{t_seller}">
 									Seller
 								</span>
 								<span class="required_field">*</span>
 							</label>
 							<div class="col-sm-6">
 								<select id="seller" class="form-control" required="required" th:field="*{sellerId}">
-									<option value="" th:text="#{t_not_chosen_masculine}">Not chosen</option>
+									<option value="" data-text="#{t_not_chosen_masculine}">Not chosen</option>
 									{/*
 									<th:block th:each="item : ${sellers}">
 										<optgroup th:if="${not #lists.isEmpty(item.children)}" th:label="${item.name}">
@@ -87,7 +87,7 @@ class SeriesSaleAddForm extends React.Component {
 						</div>
 						
 						<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('url') ? 'has-error' : ''}">
-							<label for="url" class="control-label col-sm-3" th:text="#{t_url}">
+							<label for="url" class="control-label col-sm-3" data-text="#{t_url}">
 								URL
 							</label>
 							<div class="col-sm-6">
@@ -100,7 +100,7 @@ class SeriesSaleAddForm extends React.Component {
 						
 						<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('price') or #fields.hasErrors('currency') ? 'has-error' : ''}">
 							<label for="price" class="control-label col-sm-3">
-								<span th:remove="tag" th:text="#{t_price}">
+								<span th:remove="tag" data-text="#{t_price}">
 									Price
 								</span>
 								<span class="required_field">*</span>
@@ -129,7 +129,7 @@ class SeriesSaleAddForm extends React.Component {
 						</div>
 						
 						<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('altPrice') or #fields.hasErrors('altCurrency') ? 'has-error' : ''}">
-							<label for="price" class="control-label col-sm-3" th:text="#{t_alternative_price}">
+							<label for="price" class="control-label col-sm-3" data-text="#{t_alternative_price}">
 								Alternative price
 							</label>
 							<div class="col-sm-6">
@@ -156,12 +156,12 @@ class SeriesSaleAddForm extends React.Component {
 						</div>
 						
 						<div class="form-group form-group-sm" th:classappend="${#fields.hasErrors('buyerId') ? 'has-error' : ''}">
-							<label for="buyer" class="control-label col-sm-3" th:text="#{t_buyer}">
+							<label for="buyer" class="control-label col-sm-3" data-text="#{t_buyer}">
 								Buyer
 							</label>
 							<div class="col-sm-6">
 								<select id="buyer" class="form-control" th:field="*{buyerId}">
-									<option value="" th:text="#{t_not_chosen_masculine}">Not chosen</option>
+									<option value="" data-text="#{t_not_chosen_masculine}">Not chosen</option>
 									{/*
 										<th:block th:each="item : ${buyers}">
 											<optgroup th:if="${not #lists.isEmpty(item.children)}" th:label="${item.name}">
