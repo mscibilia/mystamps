@@ -716,7 +716,12 @@
 									</form>
 								</div>
 							</div>
-
+							
+							<div id="addSeriesSaleForm"
+								togglz:active="ADD_PURCHASES_AND_SALES"
+								sec:authorize="hasAuthority('ADD_SERIES_SALES')">
+							</div>
+							
 							<!--/* @todo #995 Series sale import: add support for new sellers */-->
 							<!--/* @todo #1057 Series sale import form: show a message when JavaScript is disabled */-->
 							<div id="importSeriesSaleForm"
@@ -748,19 +753,26 @@
 		/*/-->
 		<script src="../../../../javascript/DateUtils.js" th:src="${DATE_UTILS_JS}"></script>
 		<script src="../../../../javascript/series/info.js" th:src="${SERIES_INFO_JS}"></script>
+		<script src="https://unpkg.com/react@16.8.6/umd/react.development.js" th:src="${REACT_JS}"></script>
+		<script src="https://unpkg.com/react-dom@16.8.6/umd/react-dom.development.js" th:src="${REACT_DOM_JS}"></script>
+		<script src="../../../../../../target/classes/js/components/SeriesSaleAddForm.js" th:src="${SALE_ADD_FORM_JS}"></script>
+		<script th:inline="javascript">
+			var rootElement = React.createElement(SeriesSaleAddForm);
+			var destNode = document.getElementById('addSeriesSaleForm');
+			ReactDOM.render(rootElement, destNode);
+		</script>
 		<!--/*/
 		</th:block>
 		/*/-->
 
 		<!--/*
 			NOTE: It won't work properly, if user can import a sale but can't view it because
-			SeriesSaleImportForm uses DateUtils.formatDateToDdMmYyyy() from DateUtils.js file.
+			SeriesSaleImportForm uses DateUtils.formatDateToDdMmYyyy() from DateUtils.js file
+			and requires React.
 		*/-->
 		<!--/*/
 		<th:block togglz:active="ADD_PURCHASES_AND_SALES" sec:authorize="hasAuthority('IMPORT_SERIES_SALES')">
 		/*/-->
-		<script src="https://unpkg.com/react@16.8.6/umd/react.development.js" th:src="${REACT_JS}"></script>
-		<script src="https://unpkg.com/react-dom@16.8.6/umd/react-dom.development.js" th:src="${REACT_DOM_JS}"></script>
 		<script src="../../../../../../target/classes/js/components/SeriesSaleImportForm.js" th:src="${SALE_IMPORT_FORM_JS}"></script>
 		<script th:inline="javascript">
 			/*[+
