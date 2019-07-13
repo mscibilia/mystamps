@@ -130,7 +130,7 @@ class SeriesSaleAddForm extends React.Component {
 						</div>
 						
 						<div className="form-group form-group-sm" data-classappend="${#fields.hasErrors('altPrice') or #fields.hasErrors('altCurrency') ? 'has-error' : ''}">
-							<label htmlFor="price" className="control-label col-sm-3" data-text="#{t_alternative_price}">
+							<label htmlFor="alt-price" className="control-label col-sm-3" data-text="#{t_alternative_price}">
 								Alternative price
 							</label>
 							<div className="col-sm-6">
