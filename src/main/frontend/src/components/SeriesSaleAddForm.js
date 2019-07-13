@@ -28,7 +28,7 @@ class SeriesSaleAddForm extends React.Component {
 								Date
 							</label>
 							<div class="col-sm-4">
-								<input type="text" id="date" class="form-control" data-field="*{date}" th:placeholder="#{t_dd_mm_yyyy}" placeholder="dd.mm.yyyy" />
+								<input type="text" id="date" class="form-control" data-field="*{date}" data-placeholder="#{t_dd_mm_yyyy}" placeholder="dd.mm.yyyy" />
 								{/*
 								<span id="date.errors" class="help-block" th:if="${#fields.hasErrors('date')}" th:each="error : ${#fields.errors('date')}" th:text="${error}"></span>
 								*/}
@@ -44,7 +44,7 @@ class SeriesSaleAddForm extends React.Component {
 						
 						<div class="form-group form-group-sm" data-classappend="${#fields.hasErrors('sellerId') ? 'has-error' : ''}">
 							<label for="seller" class="control-label col-sm-3">
-								<span th:remove="tag" data-text="#{t_seller}">
+								<span data-remove="tag" data-text="#{t_seller}">
 									Seller
 								</span>
 								<span class="required_field">*</span>
@@ -99,7 +99,7 @@ class SeriesSaleAddForm extends React.Component {
 						
 						<div class="form-group form-group-sm" data-classappend="${#fields.hasErrors('price') or #fields.hasErrors('currency') ? 'has-error' : ''}">
 							<label for="price" class="control-label col-sm-3">
-								<span th:remove="tag" data-text="#{t_price}">
+								<span data-remove="tag" data-text="#{t_price}">
 									Price
 								</span>
 								<span class="required_field">*</span>
