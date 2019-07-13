@@ -14,7 +14,7 @@ class SeriesSaleAddForm extends React.Component {
 	// TODO: data-field
 	render() {
 		return (
-			<div class="row" togglz:active="ADD_PURCHASES_AND_SALES" sec:authorize="hasAuthority('ADD_SERIES_SALES')">
+			<div class="row">
 				<div class="col-sm-12">
 					<h5 th:text="#{t_add_info_who_selling_series}">Add info about selling/buying this series</h5>
 					<form id="add-series-sales-form"
