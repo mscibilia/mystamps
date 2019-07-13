@@ -16,43 +16,43 @@ class SeriesSaleAddForm extends React.Component {
 	// TODO: deal with asterisk
 	render() {
 		return (
-			<div class="row">
-				<div class="col-sm-12">
+			<div className="row">
+				<div className="col-sm-12">
 					<h5 data-text="#{t_add_info_who_selling_series}">Add info about selling/buying this series</h5>
 					<form id="add-series-sales-form"
 						method="post"
-						class="form-horizontal"
+						className="form-horizontal"
 						action="info.html"
 						data-action="@{${ADD_SERIES_ASK_PAGE}(id=${series.id})}">
 						
-						<div class="form-group form-group-sm" data-classappend="${#fields.hasErrors('date') ? 'has-error' : ''}">
-							<label for="date" class="control-label col-sm-3" data-text="#{t_date}">
+						<div className="form-group form-group-sm" data-classappend="${#fields.hasErrors('date') ? 'has-error' : ''}">
+							<label for="date" className="control-label col-sm-3" data-text="#{t_date}">
 								Date
 							</label>
-							<div class="col-sm-4">
-								<input type="text" id="date" class="form-control" data-field="*{date}" data-placeholder="#{t_dd_mm_yyyy}" placeholder="dd.mm.yyyy" />
+							<div className="col-sm-4">
+								<input type="text" id="date" className="form-control" data-field="*{date}" data-placeholder="#{t_dd_mm_yyyy}" placeholder="dd.mm.yyyy" />
 								{/*
 								<span id="date.errors" class="help-block" th:if="${#fields.hasErrors('date')}" th:each="error : ${#fields.errors('date')}" th:text="${error}"></span>
 								*/}
 							</div>
 							<small>
 								<a tabindex="-1"
-									class="link-vcenter"
+									className="link-vcenter"
 									href="javascript:populateTransactionDateWithTodayDate(); void(0);" data-text="#{t_today}">
 									Today
 								</a>
 							</small>
 						</div>
 						
-						<div class="form-group form-group-sm" data-classappend="${#fields.hasErrors('sellerId') ? 'has-error' : ''}">
-							<label for="seller" class="control-label col-sm-3">
+						<div className="form-group form-group-sm" data-classappend="${#fields.hasErrors('sellerId') ? 'has-error' : ''}">
+							<label for="seller" className="control-label col-sm-3">
 								<span data-remove="tag" data-text="#{t_seller}">
 									Seller
 								</span>
-								<span class="required_field">*</span>
+								<span className="required_field">*</span>
 							</label>
-							<div class="col-sm-6">
-								<select id="seller" class="form-control" required="required" data-field="*{sellerId}">
+							<div className="col-sm-6">
+								<select id="seller" className="form-control" required="required" data-field="*{sellerId}">
 									<option value="" data-text="#{t_not_chosen_masculine}">Not chosen</option>
 									{/*
 									<th:block th:each="item : ${sellers}">
@@ -77,7 +77,7 @@ class SeriesSaleAddForm extends React.Component {
 									<option value="2">Tommy Lee Jones</option>
 								</select>
 								<small data-authorize="hasAuthority('ADD_PARTICIPANT')">
-									<span class="hint-block" data-utext="#{t_add_seller_hint(@{${ADD_PARTICIPANT_PAGE}(seller=true)})}">
+									<span className="hint-block" data-utext="#{t_add_seller_hint(@{${ADD_PARTICIPANT_PAGE}(seller=true)})}">
 										You can also <a tabindex="-1" href="../participant/add.html?seller=true">add a new seller</a>
 									</span>
 								</small>
@@ -87,32 +87,32 @@ class SeriesSaleAddForm extends React.Component {
 							</div>
 						</div>
 						
-						<div class="form-group form-group-sm" data-classappend="${#fields.hasErrors('url') ? 'has-error' : ''}">
-							<label for="url" class="control-label col-sm-3" data-text="#{t_url}">
+						<div className="form-group form-group-sm" data-classappend="${#fields.hasErrors('url') ? 'has-error' : ''}">
+							<label for="url" className="control-label col-sm-3" data-text="#{t_url}">
 								URL
 							</label>
-							<div class="col-sm-6">
-								<input type="url" id="url" class="form-control" data-field="*{url}" />
+							<div className="col-sm-6">
+								<input type="url" id="url" className="form-control" data-field="*{url}" />
 								{/*
 								<span id="url.errors" class="help-block" th:if="${#fields.hasErrors('url')}" th:each="error : ${#fields.errors('url')}" th:text="${error}"></span>
 								*/}
 							</div>
 						</div>
 						
-						<div class="form-group form-group-sm" data-classappend="${#fields.hasErrors('price') or #fields.hasErrors('currency') ? 'has-error' : ''}">
-							<label for="price" class="control-label col-sm-3">
+						<div className="form-group form-group-sm" data-classappend="${#fields.hasErrors('price') or #fields.hasErrors('currency') ? 'has-error' : ''}">
+							<label for="price" className="control-label col-sm-3">
 								<span data-remove="tag" data-text="#{t_price}">
 									Price
 								</span>
-								<span class="required_field">*</span>
+								<span className="required_field">*</span>
 							</label>
-							<div class="col-sm-6">
-								<div class="row">
-									<div class="col-xs-6">
-										<input type="text" id="price" class="form-control" size="5" required="required" data-field="*{price}" />
+							<div className="col-sm-6">
+								<div className="row">
+									<div className="col-xs-6">
+										<input type="text" id="price" className="form-control" size="5" required="required" data-field="*{price}" />
 									</div>
-									<div class="col-xs-4 no-padding">
-										<select id="currency" class="form-control" required="required" data-field="*{currency}">
+									<div className="col-xs-4 no-padding">
+										<select id="currency" className="form-control" required="required" data-field="*{currency}">
 											<option value=""></option>
 											<option value="USD">USD</option>
 											<option value="EUR">EUR</option>
@@ -129,17 +129,17 @@ class SeriesSaleAddForm extends React.Component {
 							</div>
 						</div>
 						
-						<div class="form-group form-group-sm" data-classappend="${#fields.hasErrors('altPrice') or #fields.hasErrors('altCurrency') ? 'has-error' : ''}">
-							<label for="price" class="control-label col-sm-3" data-text="#{t_alternative_price}">
+						<div className="form-group form-group-sm" data-classappend="${#fields.hasErrors('altPrice') or #fields.hasErrors('altCurrency') ? 'has-error' : ''}">
+							<label for="price" className="control-label col-sm-3" data-text="#{t_alternative_price}">
 								Alternative price
 							</label>
-							<div class="col-sm-6">
-								<div class="row">
-									<div class="col-xs-6">
-										<input type="text" id="alt-price" class="form-control" size="5" data-field="*{altPrice}" />
+							<div className="col-sm-6">
+								<div className="row">
+									<div className="col-xs-6">
+										<input type="text" id="alt-price" className="form-control" size="5" data-field="*{altPrice}" />
 									</div>
-									<div class="col-xs-4 no-padding">
-										<select id="alt-currency" class="form-control" data-field="*{altCurrency}">
+									<div className="col-xs-4 no-padding">
+										<select id="alt-currency" className="form-control" data-field="*{altCurrency}">
 											<option value=""></option>
 											<option value="USD">USD</option>
 											<option value="EUR">EUR</option>
@@ -156,12 +156,12 @@ class SeriesSaleAddForm extends React.Component {
 							</div>
 						</div>
 						
-						<div class="form-group form-group-sm" data-classappend="${#fields.hasErrors('buyerId') ? 'has-error' : ''}">
-							<label for="buyer" class="control-label col-sm-3" data-text="#{t_buyer}">
+						<div className="form-group form-group-sm" data-classappend="${#fields.hasErrors('buyerId') ? 'has-error' : ''}">
+							<label for="buyer" className="control-label col-sm-3" data-text="#{t_buyer}">
 								Buyer
 							</label>
-							<div class="col-sm-6">
-								<select id="buyer" class="form-control" data-field="*{buyerId}">
+							<div className="col-sm-6">
+								<select id="buyer" className="form-control" data-field="*{buyerId}">
 									<option value="" data-text="#{t_not_chosen_masculine}">Not chosen</option>
 									{/*
 										<th:block th:each="item : ${buyers}">
@@ -185,7 +185,7 @@ class SeriesSaleAddForm extends React.Component {
 									</optgroup>
 								</select>
 								<small data-authorize="hasAuthority('ADD_PARTICIPANT')">
-									<span class="hint-block" data-utext="#{t_add_buyer_hint(@{${ADD_PARTICIPANT_PAGE}(buyer=true)})}">
+									<span className="hint-block" data-utext="#{t_add_buyer_hint(@{${ADD_PARTICIPANT_PAGE}(buyer=true)})}">
 										You can also <a tabindex="-1" href="../participant/add.html?buyer=true">add a new buyer</a>
 									</span>
 								</small>
@@ -195,9 +195,9 @@ class SeriesSaleAddForm extends React.Component {
 							</div>
 						</div>
 						
-						<div class="form-group form-group-sm">
-							<div class="col-sm-offset-3 col-sm-4">
-								<input type="submit" class="btn btn-primary" value="Add info" data-value="#{t_add_info}" />
+						<div className="form-group form-group-sm">
+							<div className="col-sm-offset-3 col-sm-4">
+								<input type="submit" className="btn btn-primary" value="Add info" data-value="#{t_add_info}" />
 							</div>
 						</div>
 						
