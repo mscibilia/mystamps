@@ -111,36 +111,42 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	echo
 	
 	if [ "$CS_STATUS" != 'skip' ]; then
+		fold_start checkstyle 'CheckStyle'
 		mvn --batch-mode checkstyle:check -Dcheckstyle.violationSeverity=warning \
-			>cs.log 2>&1 || CS_STATUS=fail
+			2>&1 || CS_STATUS=fail
+		fold_end checkstyle
 	fi
-	print_status "$CS_STATUS" 'Run CheckStyle'
 	
 	if [ "$PMD_STATUS" != 'skip' ]; then
+		fold_start pmd 'PMD'
 		mvn --batch-mode pmd:check \
-			>pmd.log 2>&1 || PMD_STATUS=fail
+			2>&1 || PMD_STATUS=fail
+		fold_end pmd
 	fi
-	print_status "$PMD_STATUS" 'Run PMD'
 	
 	if [ "$LICENSE_STATUS" != 'skip' ]; then
+		fold_start license 'mvn license'
 		mvn --batch-mode license:check \
-			>license.log 2>&1 || LICENSE_STATUS=fail
+			2>&1 || LICENSE_STATUS=fail
+		fold_end license
 	fi
-	print_status "$LICENSE_STATUS" 'Check license headers'
 	
 	if [ "$POM_STATUS" != 'skip' ]; then
+		fold_start sortpom 'mvn sortpom'
 		mvn --batch-mode sortpom:verify -Dsort.verifyFail=stop \
-			>pom.log 2>&1 || POM_STATUS=fail
+			2>&1 || POM_STATUS=fail
+		fold_end sortpom
 	fi
-	print_status "$POM_STATUS" 'Check sorting of pom.xml'
 	
 	if [ "$BOOTLINT_STATUS" != 'skip' ]; then
+		fold_start bootlint 'bootlint'
 		find src/main -type f -name '*.html' -print0 | xargs -0 bootlint --disable W013 \
-			>bootlint.log 2>&1 || BOOTLINT_STATUS=fail
+			2>&1 || BOOTLINT_STATUS=fail
+		fold_end bootlint
 	fi
-	print_status "$BOOTLINT_STATUS" 'Run bootlint'
 	
 	if [ "$RFLINT_STATUS" != 'skip' ]; then
+		fold_start rflint 'rflint'
 		rflint \
 			--error=all \
 			--ignore TooFewTestSteps \
@@ -151,11 +157,12 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 			--ignore RequireKeywordDocumentation \
 			--configure LineTooLong:130 \
 			src/test/robotframework \
-			>rflint.log 2>&1 || RFLINT_STATUS=fail
+			2>&1 || RFLINT_STATUS=fail
+		fold_end rflint
 	fi
-	print_status "$RFLINT_STATUS" 'Run robot framework lint'
 	
 	if [ "$SHELLCHECK_STATUS" != 'skip' ]; then
+		fold_start shellcheck 'shellcheck'
 		# Shellcheck doesn't support recursive scanning: https://github.com/koalaman/shellcheck/issues/143
 		# Also I don't want to invoke it many times (slower, more code for handling failures), so I prefer this way.
 		# shellcheck disable=SC2207
@@ -164,17 +171,19 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 			--shell bash \
 			--format gcc \
 			"${SHELL_FILES[@]}" \
-			>shellcheck.log 2>&1 || SHELLCHECK_STATUS=fail
+			2>&1 || SHELLCHECK_STATUS=fail
+		fold_end shellcheck
 	fi
-	print_status "$SHELLCHECK_STATUS" 'Run shellcheck'
 	
 	if [ "$JASMINE_STATUS" != 'skip' ]; then
+		fold_start jasmine 'JS: Unit Tests'
 		mvn --batch-mode jasmine:test \
-			>jasmine.log 2>&1 || JASMINE_STATUS=fail
+			2>&1 || JASMINE_STATUS=fail
+		fold_end jasmine
 	fi
-	print_status "$JASMINE_STATUS" 'Run JavaScript unit tests'
 	
 	if [ "$HTML_STATUS" != 'skip' ]; then
+		fold_start html5validator 'html5validator'
 		# FIXME: remove ignoring of error about alt attribute after resolving #314
 		# @todo #109 Check src/main/config/nginx/503.*html by html5validator
 		# @todo #695 /series/import/request/{id}: use divs instead of table for elements aligning
@@ -189,73 +198,73 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 				'Element "option" without attribute "label" must not be empty' \
 				'The "width" attribute on the "td" element is obsolete' \
 			--show-warnings \
-			>validator.log 2>&1 || HTML_STATUS=fail
+			2>&1 || HTML_STATUS=fail
+		fold_end html5validator
 	fi
-	print_status "$HTML_STATUS" 'Run html5validator'
 	
 	if [ "$ENFORCER_STATUS" != 'skip' ]; then
+		fold_start enforcer 'mvn enforcer'
 		mvn --batch-mode enforcer:enforce \
-			>enforcer.log 2>&1 || ENFORCER_STATUS=fail
+			2>&1 || ENFORCER_STATUS=fail
+		fold_end enforcer
 	fi
-	print_status "$ENFORCER_STATUS" 'Run maven-enforcer-plugin'
 	
 	if [ "$TEST_STATUS" != 'skip' ]; then
+		fold_start unit 'Java: Unit Tests'
 		mvn --batch-mode test -Denforcer.skip=true -Dmaven.resources.skip=true -DskipMinify=true -DdisableXmlReport=false -Dskip.npm -Dskip.installnodenpm \
-			>test.log 2>&1 || TEST_STATUS=fail
+			2>&1 || TEST_STATUS=fail
+		fold_end unit
 	fi
-	print_status "$TEST_STATUS" 'Run unit tests'
 	
 	if [ "$CODENARC_STATUS" != 'skip' ]; then
+		fold_start codenarc 'CodeNarc'
 		# run after tests for getting compiled sources
 		mvn --batch-mode codenarc:codenarc -Dcodenarc.maxPriority1Violations=0 -Dcodenarc.maxPriority2Violations=0 -Dcodenarc.maxPriority3Violations=0 \
-			>codenarc.log 2>&1 || CODENARC_STATUS=fail
+			2>&1 || CODENARC_STATUS=fail
+		fold_end codenarc
 	fi
-	print_status "$CODENARC_STATUS" 'Run CodeNarc'
 	
 	if [ "$SPOTBUGS_STATUS" != 'skip' ]; then
+		fold_start spotbugs 'SpotBugs'
 		# run after tests for getting compiled sources
 		mvn --batch-mode spotbugs:check \
-			>spotbugs.log 2>&1 || SPOTBUGS_STATUS=fail
+			2>&1 || SPOTBUGS_STATUS=fail
+		fold_end spotbugs
 	fi
-	print_status "$SPOTBUGS_STATUS" 'Run SpotBugs'
 fi
 
+fold_start verify 'Integration Tests'
 mvn --batch-mode --activate-profiles frontend verify -Denforcer.skip=true -DskipUnitTests=true \
 	>verify-raw.log 2>&1 || VERIFY_STATUS=fail
 # Workaround for #538
-"$(dirname "$0")/filter-out-htmlunit-messages.pl" <verify-raw.log >verify.log
-
-print_status "$VERIFY_STATUS" 'Run integration tests'
-
+"$(dirname "$0")/filter-out-htmlunit-messages.pl" <verify-raw.log
+rm -f verify-raw.log
+fold_end verify
 
 if [ "$DANGER_STATUS" != 'skip' ]; then
-	danger >danger.log 2>&1 || DANGER_STATUS=fail
+	fold_start danger 'Danger'
+	danger 2>&1 || DANGER_STATUS=fail
+	fold_end danger
 fi
-print_status "$DANGER_STATUS" 'Run danger'
 
 if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
-	[ "$CS_STATUS" = 'skip' ]         || print_log cs.log         'Run CheckStyle'
-	[ "$PMD_STATUS" = 'skip' ]        || print_log pmd.log        'Run PMD'
-	[ "$LICENSE_STATUS" = 'skip' ]    || print_log license.log    'Check license headers'
-	[ "$POM_STATUS" = 'skip' ]        || print_log pom.log        'Check sorting of pom.xml'
-	[ "$BOOTLINT_STATUS" = 'skip' ]   || print_log bootlint.log   'Run bootlint'
-	[ "$RFLINT_STATUS" = 'skip' ]     || print_log rflint.log     'Run robot framework lint'
-	[ "$SHELLCHECK_STATUS" = 'skip' ] || print_log shellcheck.log 'Run shellcheck'
-	[ "$JASMINE_STATUS" = 'skip' ]    || print_log jasmine.log    'Run JavaScript unit tests'
-	[ "$HTML_STATUS" = 'skip' ]       || print_log validator.log  'Run html5validator'
-	[ "$ENFORCER_STATUS" = 'skip' ]   || print_log enforcer.log   'Run maven-enforcer-plugin'
-	[ "$TEST_STATUS" = 'skip' ]       || print_log test.log       'Run unit tests'
-	[ "$CODENARC_STATUS" = 'skip' ]   || print_log codenarc.log   'Run CodeNarc'
-	[ "$SPOTBUGS_STATUS" = 'skip' ]   || print_log spotbugs.log   'Run SpotBugs'
+	print_status "$CS_STATUS"         'Run CheckStyle'
+	print_status "$PMD_STATUS"        'Run PMD'
+	print_status "$LICENSE_STATUS"    'Check license headers'
+	print_status "$POM_STATUS"        'Check sorting of pom.xml'
+	print_status "$BOOTLINT_STATUS"   'Run bootlint'
+	print_status "$RFLINT_STATUS"     'Run robot framework lint'
+	print_status "$SHELLCHECK_STATUS" 'Run shellcheck'
+	print_status "$JASMINE_STATUS"    'Run JavaScript unit tests'
+	print_status "$HTML_STATUS"       'Run html5validator'
+	print_status "$ENFORCER_STATUS"   'Run maven-enforcer-plugin'
+	print_status "$TEST_STATUS"       'Run unit tests'
+	print_status "$CODENARC_STATUS"   'Run CodeNarc'
+	print_status "$SPOTBUGS_STATUS"   'Run SpotBugs'
 fi
 
-print_log verify.log   'Run integration tests'
-
-if [ "$DANGER_STATUS" != 'skip' ]; then
-	print_log danger.log 'Run danger'
-fi
-
-rm -f cs.log pmd.log license.log pom.log bootlint.log rflint.log shellcheck.log jasmine.log validator.log enforcer.log test.log codenarc.log spotbugs.log verify-raw.log verify.log danger.log
+print_status "$VERIFY_STATUS" 'Run integration tests'
+print_status "$DANGER_STATUS" 'Run danger'
 
 if echo "$CS_STATUS$PMD_STATUS$LICENSE_STATUS$POM_STATUS$BOOTLINT_STATUS$RFLINT_STATUS$SHELLCHECK_STATUS$JASMINE_STATUS$HTML_STATUS$ENFORCER_STATUS$TEST_STATUS$CODENARC_STATUS$SPOTBUGS_STATUS$VERIFY_STATUS$DANGER_STATUS" | grep -Fqs 'fail'; then
 	exit 1

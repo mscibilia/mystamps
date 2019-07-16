@@ -18,12 +18,15 @@ print_status() {
 	printf "* %s... \033[1;%dm%s\033[0m\n" "$msg" "$color" "$status"
 }
 
-print_log() {
-	local log_file="$1"
-	local msg="$2"
+fold_start() {
+	local name="$1"
+	local title="$2"
 	
-	echo
-	printf "=====> \033[1;33m%s\033[0m\n" "$msg"
-	echo
-	grep -Ev '^\[INFO\] Download(ing|ed)' "$log_file" || :
+	printf "\ntravis_fold:start:%s\033[33;1m%s\033[0m\n" "$name" "$title"
+}
+
+fold_end() {
+	local name="$1"
+	
+	printf "\ntravis_fold:end:%s\r" "$name"
 }
