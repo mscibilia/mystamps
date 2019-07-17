@@ -757,6 +757,27 @@
 		<script src="https://unpkg.com/react-dom@16.8.6/umd/react-dom.development.js" th:src="${REACT_DOM_JS}"></script>
 		<script src="../../../../../../target/classes/js/components/SeriesSaleAddForm.js" th:src="${SALE_ADD_FORM_JS}"></script>
 		<script th:inline="javascript">
+			/*[+
+			var props = {
+				'l10n': {
+					't_add_info_who_selling_series': [[ #{t_add_info_who_selling_series} ]],
+					't_date':                        [[ #{t_date} ]],
+					't_today':                       [[ #{t_today} ]],
+					't_seller':                      [[ #{t_seller} ]],
+					't_not_chosen_masculine':        [[ #{t_not_chosen_masculine} ]],
+					't_url':                         [[ #{t_url} ]],
+					't_price':                       [[ #{t_price} ]],
+					't_alternative_price':           [[ #{t_alternative_price} ]],
+					't_buyer':                       [[ #{t_buyer} ]],
+					't_not_chosen_masculine':        [[ #{t_not_chosen_masculine} ]]
+				}
+			};
+			+]*/
+			
+			/*[- */
+			var props = { 'l10n': {} };
+			/* -]*/
+			
 			var rootElement = React.createElement(SeriesSaleAddForm);
 			var destNode = document.getElementById('addSeriesSaleForm');
 			ReactDOM.render(rootElement, destNode);

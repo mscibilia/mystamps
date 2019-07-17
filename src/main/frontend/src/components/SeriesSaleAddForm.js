@@ -6,11 +6,9 @@
 // @todo #1056 SeriesSaleAddForm: add tests
 class SeriesSaleAddForm extends React.Component {
 	
-	// TODO: data-text to l10n
 	// TODO: data-action
 	// TODO: data-classappend
 	// TODO: data-placeholder
-	// TODO: data-remove
 	// TODO: data-field
 	// TODO: data-value
 	// TODO: deal with asterisk
@@ -19,7 +17,9 @@ class SeriesSaleAddForm extends React.Component {
 		return (
 			<div className="row" style={{ 'backgroundColor': '#f5f5f5' }}>
 				<div className="col-sm-12">
-					<h5 data-text="#{t_add_info_who_selling_series}">Add info about selling/buying this series</h5>
+					<h5>
+						{ this.props.l10n['t_add_info_who_selling_series'] || 'Add info about selling/buying this series' }
+					</h5>
 					<form id="add-series-sales-form"
 						method="post"
 						className="form-horizontal"
@@ -27,8 +27,8 @@ class SeriesSaleAddForm extends React.Component {
 						data-action="@{${ADD_SERIES_ASK_PAGE}(id=${series.id})}">
 						
 						<div className="form-group form-group-sm" data-classappend="${#fields.hasErrors('date') ? 'has-error' : ''}">
-							<label htmlFor="date" className="control-label col-sm-3" data-text="#{t_date}">
-								Date
+							<label htmlFor="date" className="control-label col-sm-3">
+								{ this.props.l10n['t_date'] || 'Date' }
 							</label>
 							<div className="col-sm-4">
 								<input type="text" id="date" className="form-control" data-field="*{date}" data-placeholder="#{t_dd_mm_yyyy}" placeholder="dd.mm.yyyy" />
@@ -39,22 +39,22 @@ class SeriesSaleAddForm extends React.Component {
 							<small>
 								<a tabIndex="-1"
 									className="link-vcenter"
-									href="javascript:populateTransactionDateWithTodayDate(); void(0);" data-text="#{t_today}">
-									Today
+									href="javascript:populateTransactionDateWithTodayDate(); void(0);">
+									{ this.props.l10n['t_today'] || 'Today' }
 								</a>
 							</small>
 						</div>
 						
 						<div className="form-group form-group-sm" data-classappend="${#fields.hasErrors('sellerId') ? 'has-error' : ''}">
 							<label htmlFor="seller" className="control-label col-sm-3">
-								<span data-remove="tag" data-text="#{t_seller}">
-									Seller
-								</span>
+								{ this.props.l10n['t_seller'] || 'Seller' }
 								<span className="required_field">*</span>
 							</label>
 							<div className="col-sm-6">
 								<select id="seller" className="form-control" required="required" data-field="*{sellerId}">
-									<option value="" data-text="#{t_not_chosen_masculine}">Not chosen</option>
+									<option value="">
+										{ this.props.l10n['t_not_chosen_masculine'] || 'Not chosen' }
+									</option>
 									{/*
 									<th:block th:each="item : ${sellers}">
 										<optgroup th:if="${not #lists.isEmpty(item.children)}" th:label="${item.name}">
@@ -89,8 +89,8 @@ class SeriesSaleAddForm extends React.Component {
 						</div>
 						
 						<div className="form-group form-group-sm" data-classappend="${#fields.hasErrors('url') ? 'has-error' : ''}">
-							<label htmlFor="url" className="control-label col-sm-3" data-text="#{t_url}">
-								URL
+							<label htmlFor="url" className="control-label col-sm-3">
+								{ this.props.l10n['t_url'] || 'URL' }
 							</label>
 							<div className="col-sm-6">
 								<input type="url" id="url" className="form-control" data-field="*{url}" />
@@ -102,9 +102,7 @@ class SeriesSaleAddForm extends React.Component {
 						
 						<div className="form-group form-group-sm" data-classappend="${#fields.hasErrors('price') or #fields.hasErrors('currency') ? 'has-error' : ''}">
 							<label htmlFor="price" className="control-label col-sm-3">
-								<span data-remove="tag" data-text="#{t_price}">
-									Price
-								</span>
+								{ this.props.l10n['t_price'] || 'Price' }
 								<span className="required_field">*</span>
 							</label>
 							<div className="col-sm-6">
@@ -131,8 +129,8 @@ class SeriesSaleAddForm extends React.Component {
 						</div>
 						
 						<div className="form-group form-group-sm" data-classappend="${#fields.hasErrors('altPrice') or #fields.hasErrors('altCurrency') ? 'has-error' : ''}">
-							<label htmlFor="alt-price" className="control-label col-sm-3" data-text="#{t_alternative_price}">
-								Alternative price
+							<label htmlFor="alt-price" className="control-label col-sm-3">
+								{ this.props.l10n['t_alternative_price'] || 'Alternative price' }
 							</label>
 							<div className="col-sm-6">
 								<div className="row">
@@ -158,12 +156,14 @@ class SeriesSaleAddForm extends React.Component {
 						</div>
 						
 						<div className="form-group form-group-sm" data-classappend="${#fields.hasErrors('buyerId') ? 'has-error' : ''}">
-							<label htmlFor="buyer" className="control-label col-sm-3" data-text="#{t_buyer}">
-								Buyer
+							<label htmlFor="buyer" className="control-label col-sm-3">
+								{ this.props.l10n['t_buyer'] || 'Buyer' }
 							</label>
 							<div className="col-sm-6">
 								<select id="buyer" className="form-control" data-field="*{buyerId}">
-									<option value="" data-text="#{t_not_chosen_masculine}">Not chosen</option>
+									<option value="">
+										{ this.props.l10n['t_not_chosen_masculine'] || 'Not chosen' }
+									</option>
 									{/*
 										<th:block th:each="item : ${buyers}">
 											<optgroup th:if="${not #lists.isEmpty(item.children)}" th:label="${item.name}">
