@@ -8,9 +8,7 @@ class SeriesSaleAddForm extends React.Component {
 	
 	// TODO: data-action
 	// TODO: data-classappend
-	// TODO: data-placeholder
 	// TODO: data-field
-	// TODO: data-value
 	// TODO: deal with asterisk
 	// TODO: remove background
 	render() {
@@ -31,7 +29,11 @@ class SeriesSaleAddForm extends React.Component {
 								{ this.props.l10n['t_date'] || 'Date' }
 							</label>
 							<div className="col-sm-4">
-								<input type="text" id="date" className="form-control" data-field="*{date}" data-placeholder="#{t_dd_mm_yyyy}" placeholder="dd.mm.yyyy" />
+								<input id="date"
+									type="text"
+									className="form-control"
+									data-field="*{date}"
+									placeholder={ this.props.l10n['t_dd_mm_yyyy'] || 'dd.mm.yyyy' } />
 								{/*
 								<span id="date.errors" class="help-block" th:if="${#fields.hasErrors('date')}" th:each="error : ${#fields.errors('date')}" th:text="${error}"></span>
 								*/}
@@ -78,8 +80,10 @@ class SeriesSaleAddForm extends React.Component {
 									<option value="2">Tommy Lee Jones</option>
 								</select>
 								<small data-authorize="hasAuthority('ADD_PARTICIPANT')">
-									<span className="hint-block" data-utext="#{t_add_seller_hint(@{${ADD_PARTICIPANT_PAGE}(seller=true)})}">
-										You can also <a tabIndex="-1" href="../participant/add.html?seller=true">add a new seller</a>
+									<span className="hint-block">
+										<a tabIndex="-1" href={this.props.addSellerUrl}>
+											{ this.props.l10n['t_add_new_seller'] || 'Add a new seller' }
+										</a>
 									</span>
 								</small>
 								{/*
@@ -186,8 +190,10 @@ class SeriesSaleAddForm extends React.Component {
 									</optgroup>
 								</select>
 								<small data-authorize="hasAuthority('ADD_PARTICIPANT')">
-									<span className="hint-block" data-utext="#{t_add_buyer_hint(@{${ADD_PARTICIPANT_PAGE}(buyer=true)})}">
-										You can also <a tabIndex="-1" href="../participant/add.html?buyer=true">add a new buyer</a>
+									<span className="hint-block">
+										<a tabIndex="-1" href={this.props.addBuyerUrl}>
+											{ this.props.l10n['t_add_new_buyer'] || 'Add a new buyer' }
+										</a>
 									</span>
 								</small>
 								{/*
@@ -198,7 +204,9 @@ class SeriesSaleAddForm extends React.Component {
 						
 						<div className="form-group form-group-sm">
 							<div className="col-sm-offset-3 col-sm-4">
-								<input type="submit" className="btn btn-primary" value="Add info" data-value="#{t_add_info}" />
+								<input type="submit"
+									className="btn btn-primary"
+									value={ this.props.l10n['t_add_info'] || 'Add info' } />
 							</div>
 						</div>
 						

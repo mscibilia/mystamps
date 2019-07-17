@@ -759,26 +759,36 @@
 		<script th:inline="javascript">
 			/*[+
 			var props = {
+				'addSellerUrl': [[ '__@{${ADD_PARTICIPANT_PAGE}(seller=true)}__' ]],
+				'addBuyerUrl':  [[ '__@{${ADD_PARTICIPANT_PAGE}(buyer=true)}__' ]],
 				'l10n': {
 					't_add_info_who_selling_series': [[ #{t_add_info_who_selling_series} ]],
 					't_date':                        [[ #{t_date} ]],
+					't_dd_mm_yyyy':                  [[ #{t_dd_mm_yyyy} ]],
 					't_today':                       [[ #{t_today} ]],
 					't_seller':                      [[ #{t_seller} ]],
 					't_not_chosen_masculine':        [[ #{t_not_chosen_masculine} ]],
+					't_add_new_seller':              [[ #{t_add_new_seller} ]],
 					't_url':                         [[ #{t_url} ]],
 					't_price':                       [[ #{t_price} ]],
 					't_alternative_price':           [[ #{t_alternative_price} ]],
 					't_buyer':                       [[ #{t_buyer} ]],
-					't_not_chosen_masculine':        [[ #{t_not_chosen_masculine} ]]
+					't_not_chosen_masculine':        [[ #{t_not_chosen_masculine} ]],
+					't_add_new_buyer':               [[ #{t_add_new_buyer} ]],
+					't_add_info':                    [[ #{t_add_info} ]]
 				}
 			};
 			+]*/
 			
 			/*[- */
-			var props = { 'l10n': {} };
+			var props = {
+				'addSellerUrl': '../participant/add.html?seller=true',
+				'addBuyerUrl':  '../participant/add.html?buyer=true',
+				'l10n': {}
+			};
 			/* -]*/
 			
-			var rootElement = React.createElement(SeriesSaleAddForm);
+			var rootElement = React.createElement(SeriesSaleAddForm, props);
 			var destNode = document.getElementById('addSeriesSaleForm');
 			ReactDOM.render(rootElement, destNode);
 		</script>
