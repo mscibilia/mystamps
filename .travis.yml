@@ -33,6 +33,8 @@ before_script:
     elif [ "$SPRING_PROFILES_ACTIVE" = 'postgres' ]; then
       psql -U postgres -c 'create database mystamps;';
     fi
+  # download maven (if needed) to make it available later
+  - ./mvnw --version
 
 script:
   - if [ "$SPRING_PROFILES_ACTIVE" = 'travis' ]; then

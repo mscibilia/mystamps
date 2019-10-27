@@ -39,6 +39,14 @@ if [ "${SPRING_PROFILES_ACTIVE:-}" = 'travis' ] && [ "${TRAVIS_PULL_REQUEST:-fal
 	DANGER_STATUS=
 fi
 
+CURDIR="$(dirname "$0")"
+MVN=mvn
+if [ -x ./mvnw ]; then
+	MVN=./mvnw
+elif [ -x "$CURDIR/../../../../mvnw" ]; then
+	MVN=$CURDIR/../../../../mvnw
+fi
+
 echo
 
 if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
@@ -118,25 +126,25 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	echo
 	
 	if [ "$CS_STATUS" != 'skip' ]; then
-		mvn --batch-mode checkstyle:check -Dcheckstyle.violationSeverity=warning \
+		$MVN --batch-mode checkstyle:check -Dcheckstyle.violationSeverity=warning \
 			>cs.log 2>&1 || CS_STATUS=fail
 	fi
 	print_status "$CS_STATUS" 'Run CheckStyle'
 	
 	if [ "$PMD_STATUS" != 'skip' ]; then
-		mvn --batch-mode pmd:check \
+		$MVN --batch-mode pmd:check \
 			>pmd.log 2>&1 || PMD_STATUS=fail
 	fi
 	print_status "$PMD_STATUS" 'Run PMD'
 	
 	if [ "$LICENSE_STATUS" != 'skip' ]; then
-		mvn --batch-mode license:check \
+		$MVN --batch-mode license:check \
 			>license.log 2>&1 || LICENSE_STATUS=fail
 	fi
 	print_status "$LICENSE_STATUS" 'Check license headers'
 	
 	if [ "$POM_STATUS" != 'skip' ]; then
-		mvn --batch-mode sortpom:verify -Dsort.verifyFail=stop \
+		$MVN --batch-mode sortpom:verify -Dsort.verifyFail=stop \
 			>pom.log 2>&1 || POM_STATUS=fail
 	fi
 	print_status "$POM_STATUS" 'Check sorting of pom.xml'
@@ -171,7 +179,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	print_status "$SHELLCHECK_STATUS" 'Run shellcheck'
 	
 	if [ "$JASMINE_STATUS" != 'skip' ]; then
-		mvn --batch-mode jasmine:test \
+		$MVN --batch-mode jasmine:test \
 			>jasmine.log 2>&1 || JASMINE_STATUS=fail
 	fi
 	print_status "$JASMINE_STATUS" 'Run JavaScript unit tests'
@@ -195,27 +203,27 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	print_status "$HTML_STATUS" 'Run html5validator'
 	
 	if [ "$ENFORCER_STATUS" != 'skip' ]; then
-		mvn --batch-mode enforcer:enforce \
+		$MVN --batch-mode enforcer:enforce \
 			>enforcer.log 2>&1 || ENFORCER_STATUS=fail
 	fi
 	print_status "$ENFORCER_STATUS" 'Run maven-enforcer-plugin'
 	
 	if [ "$TEST_STATUS" != 'skip' ]; then
-		mvn --batch-mode test -Denforcer.skip=true -Dmaven.resources.skip=true -DskipMinify=true -DdisableXmlReport=false -Dskip.npm -Dskip.installnodenpm \
+		$MVN --batch-mode test -Denforcer.skip=true -Dmaven.resources.skip=true -DskipMinify=true -DdisableXmlReport=false -Dskip.npm -Dskip.installnodenpm \
 			>test.log 2>&1 || TEST_STATUS=fail
 	fi
 	print_status "$TEST_STATUS" 'Run unit tests'
 	
 	if [ "$CODENARC_STATUS" != 'skip' ]; then
 		# run after tests for getting compiled sources
-		mvn --batch-mode codenarc:codenarc -Dcodenarc.maxPriority1Violations=0 -Dcodenarc.maxPriority2Violations=0 -Dcodenarc.maxPriority3Violations=0 \
+		$MVN --batch-mode codenarc:codenarc -Dcodenarc.maxPriority1Violations=0 -Dcodenarc.maxPriority2Violations=0 -Dcodenarc.maxPriority3Violations=0 \
 			>codenarc.log 2>&1 || CODENARC_STATUS=fail
 	fi
 	print_status "$CODENARC_STATUS" 'Run CodeNarc'
 	
 	if [ "$SPOTBUGS_STATUS" != 'skip' ]; then
 		# run after tests for getting compiled sources
-		mvn --batch-mode spotbugs:check \
+		$MVN --batch-mode spotbugs:check \
 			>spotbugs.log 2>&1 || SPOTBUGS_STATUS=fail
 	fi
 	print_status "$SPOTBUGS_STATUS" 'Run SpotBugs'
@@ -230,7 +238,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	print_status "$ANSIBLE_LINT_STATUS" 'Run Ansible Lint'
 fi
 
-mvn --batch-mode --activate-profiles frontend,native2ascii verify -Denforcer.skip=true -DskipUnitTests=true \
+$MVN --batch-mode --activate-profiles frontend,native2ascii verify -Denforcer.skip=true -DskipUnitTests=true \
 	>verify-raw.log 2>&1 || VERIFY_STATUS=fail
 # Workaround for #538
 "$(dirname "$0")/filter-out-htmlunit-messages.pl" <verify-raw.log >verify.log
