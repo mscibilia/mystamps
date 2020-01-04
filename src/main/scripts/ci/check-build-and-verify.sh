@@ -53,6 +53,7 @@ RFLINT_STATUS=
 SHELLCHECK_STATUS=
 JASMINE_STATUS=
 HTML_STATUS=
+CSSLINT_STAUS=
 ENFORCER_STATUS=
 TEST_STATUS=
 CODENARC_STATUS=
@@ -86,6 +87,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 			AFFECTS_SPOTBUGS_CFG="$(echo "$MODIFIED_FILES"  |  grep -q 'spotbugs-filter\.xml$' || echo 'no')"
 			AFFECTS_PMD_XML="$(echo "$MODIFIED_FILES"       |  grep -q 'pmd\.xml$' || echo 'no')"
 			AFFECTS_JS_FILES="$(echo "$MODIFIED_FILES"      |  grep -q '\.js$' || echo 'no')"
+			AFFECTS_CSS_FILES="$(echo "$MODIFIED_FILES"     |  grep -q '\.css$' || echo 'no')"
 			AFFECTS_HTML_FILES="$(echo "$MODIFIED_FILES"    |  grep -q '\.html$' || echo 'no')"
 			AFFECTS_JAVA_FILES="$(echo "$MODIFIED_FILES"    |  grep -q '\.java$' || echo 'no')"
 			AFFECTS_ROBOT_FILES="$(echo "$MODIFIED_FILES"   |  grep -q '\.robot$' || echo 'no')"
@@ -123,6 +125,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 					BOOTLINT_STATUS=skip
 					HTML_STATUS=skip
 				fi
+				[ "$AFFECTS_CSS_FILES" != 'no' ] || CSSLINT_STAUS=skip
 				[ "$AFFECTS_ROBOT_FILES" != 'no' ] || RFLINT_STATUS=skip
 				[ "$AFFECTS_SHELL_FILES" != 'no' ] || SHELLCHECK_STATUS=skip
 
@@ -222,6 +225,12 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	fi
 	print_status "$HTML_STATUS" 'Run html5validator'
 	
+	if [ "$CSSLINT_STAUS" != 'skip' ]; then
+		csslint src/main/webapp/WEB-INF/static/styles/main.css \
+			>csslint.log 2>&1 || CSSLINT_STAUS=fail
+	fi
+	print_status "$CSSLINT_STAUS" 'Run csslint'
+	
 	if [ "$ENFORCER_STATUS" != 'skip' ]; then
 		mvn --batch-mode enforcer:enforce \
 			>enforcer.log 2>&1 || ENFORCER_STATUS=fail
@@ -282,6 +291,7 @@ if [ "$RUN_ONLY_INTEGRATION_TESTS" = 'no' ]; then
 	[ "$SHELLCHECK_STATUS" = 'skip' ]     || print_log shellcheck.log     'Run shellcheck'
 	[ "$JASMINE_STATUS" = 'skip' ]        || print_log jasmine.log        'Run JavaScript unit tests'
 	[ "$HTML_STATUS" = 'skip' ]           || print_log validator.log      'Run html5validator'
+	[ "$CSSLINT_STAUS" = 'skip' ]         || print_log csslint.log        'Run csslint'
 	[ "$ENFORCER_STATUS" = 'skip' ]       || print_log enforcer.log       'Run maven-enforcer-plugin'
 	[ "$TEST_STATUS" = 'skip' ]           || print_log test.log           'Run unit tests'
 	[ "$CODENARC_STATUS" = 'skip' ]       || print_log codenarc.log       'Run CodeNarc'
@@ -297,6 +307,6 @@ fi
 
 rm -f cs.log pmd.log license.log pom.log bootlint.log rflint.log shellcheck.log jasmine.log validator.log enforcer.log test.log codenarc.log spotbugs.log verify-raw.log verify.log danger.log ansible_lint.log
 
-if echo "$CS_STATUS$PMD_STATUS$LICENSE_STATUS$POM_STATUS$BOOTLINT_STATUS$RFLINT_STATUS$SHELLCHECK_STATUS$JASMINE_STATUS$HTML_STATUS$ENFORCER_STATUS$TEST_STATUS$CODENARC_STATUS$SPOTBUGS_STATUS$VERIFY_STATUS$DANGER_STATUS$ANSIBLE_LINT_STATUS" | grep -Fqs 'fail'; then
+if echo "$CS_STATUS$PMD_STATUS$LICENSE_STATUS$POM_STATUS$BOOTLINT_STATUS$RFLINT_STATUS$SHELLCHECK_STATUS$JASMINE_STATUS$HTML_STATUS$CSSLINT_STAUS$ENFORCER_STATUS$TEST_STATUS$CODENARC_STATUS$SPOTBUGS_STATUS$VERIFY_STATUS$DANGER_STATUS$ANSIBLE_LINT_STATUS" | grep -Fqs 'fail'; then
 	exit 1
 fi
